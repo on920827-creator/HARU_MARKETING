@@ -146,10 +146,26 @@
   </div>
 </footer>
 
+<div class="km" id="km" hidden>
+  <div class="km-bg" data-close></div>
+  <div class="km-box" role="dialog" aria-modal="true" aria-labelledby="kmT" tabindex="-1">
+    <button class="km-x" type="button" data-close aria-label="닫기">&times;</button>
+    <p class="km-k" id="kmNo"></p>
+    <h3 id="kmT"></h3>
+    <p class="km-lead" id="kmLead"></p>
+    <h4>이렇게 진행합니다</h4>
+    <ol class="km-steps" id="kmSteps"></ol>
+    <div class="km-fit"><span>이런 분께</span><p id="kmFit"></p></div>
+    <div class="km-btns"><a class="btn dark" id="kmTel" href="#">전화 상담</a><button class="btn line" type="button" data-close>닫기</button></div>
+    <div class="km-pg"><button type="button" data-step="-1">&larr; 이전</button><button type="button" data-step="1">다음 &rarr;</button></div>
+  </div>
+</div>
+
 <button class="bgm" id="bgm" type="button" aria-pressed="false" aria-label="배경음악 켜기"><span class="eq"><i></i><i></i><i></i><i></i></span><span class="lb">BGM</span></button>
 <a class="fab" id="fab" href="#">📞 상담 문의</a>
 
 <script src="./data.js"></script>
+<script src="./details.js"></script>
 <script src="./anim.js"></script>
 <script src="./bgm.js"></script>
 <script>
@@ -177,7 +193,7 @@ $("#mq").innerHTML = mqHtml + mqHtml + mqHtml + mqHtml;
 
 $("#aboutTitle").innerHTML = D.about.title.join("<br>");
 $("#aboutText").innerHTML = D.about.paragraphs.map(p => `<p>${esc(p)}</p>`).join("");
-$("#kw").innerHTML = D.about.keywords.map(k => `<li>${esc(k)}</li>`).join("");
+$("#kw").innerHTML = D.about.keywords.map(k => `<li><button type="button" class="kwb" data-k="${esc(k)}">${esc(k)}</button></li>`).join("");
 
 $("#stats").innerHTML = D.stats.map(s =>
   `<div class="stat"><div class="n"><span data-to="${s.n}">0</span><sup>${esc(s.unit)}</sup></div><div class="l">${esc(s.label)}</div></div>`).join("");
@@ -228,6 +244,42 @@ $("#pkg").innerHTML = `<span class="badge">♥ 패키지 이용 시</span><h3>${
 $("#rec").innerHTML = D.recommend.map(r => `<li>${esc(r)}</li>`).join("");
 
 initVideos();
+
+/* 키워드 상세 창: 같은 화면에서 열려서 배경음악과 스크롤 위치가 유지됩니다 */
+const KD = (typeof keywordDetails !== "undefined") ? keywordDetails : {};
+const km = $("#km"), kws = D.about.keywords.filter(k => KD[k]);
+let kmIdx = 0, kmFrom = null;
+function kmShow(i) {
+  kmIdx = (i + kws.length) % kws.length;
+  const k = kws[kmIdx], d = KD[k];
+  $("#kmNo").textContent = pad(kmIdx + 1) + " / " + pad(kws.length);
+  $("#kmT").textContent = k;
+  $("#kmLead").textContent = d.lead;
+  $("#kmSteps").innerHTML = d.steps.map(s => `<li>${esc(s)}</li>`).join("");
+  $("#kmFit").textContent = d.fit;
+  km.querySelector(".km-box").scrollTop = 0;
+}
+function kmClose() {
+  km.hidden = true; document.body.classList.remove("km-open");
+  if (kmFrom) kmFrom.focus();
+}
+$("#kmTel").href = tel; $("#kmTel").textContent = "전화 상담 " + D.phone;
+$("#kw").addEventListener("click", e => {
+  const b = e.target.closest(".kwb"); if (!b) return;
+  const i = kws.indexOf(b.dataset.k); if (i < 0) return;
+  kmFrom = b; kmShow(i); km.hidden = false;
+  document.body.classList.add("km-open"); km.querySelector(".km-box").focus();
+});
+km.addEventListener("click", e => {
+  if (e.target.closest("[data-close]")) return kmClose();
+  const s = e.target.closest("[data-step]"); if (s) kmShow(kmIdx + +s.dataset.step);
+});
+addEventListener("keydown", e => {
+  if (km.hidden) return;
+  if (e.key === "Escape") kmClose();
+  else if (e.key === "ArrowRight") kmShow(kmIdx + 1);
+  else if (e.key === "ArrowLeft") kmShow(kmIdx - 1);
+});
 
 /* 스크롤 등장 */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
