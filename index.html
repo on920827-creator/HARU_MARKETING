@@ -146,10 +146,12 @@
   </div>
 </footer>
 
+<button class="bgm" id="bgm" type="button" aria-pressed="false" aria-label="배경음악 켜기"><span class="eq"><i></i><i></i><i></i><i></i></span><span class="lb">BGM</span></button>
 <a class="fab" id="fab" href="#">📞 상담 문의</a>
 
 <script src="./data.js"></script>
 <script src="./anim.js"></script>
+<script src="./bgm.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
