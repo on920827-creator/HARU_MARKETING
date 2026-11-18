@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://on920827-creator.github.io/HARU_MARKETING/sitemap.xml
+
