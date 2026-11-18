@@ -3,8 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>하루마케팅 | 제주 로컬 브랜드 마케팅</title>
-<meta name="description" content="하루의 차이가 브랜드의 성장을 만듭니다. 플레이스 · 블로그 · SNS · 당근 · 리뷰 · 이벤트, 제주 로컬 브랜드 마케팅 파트너 하루마케팅.">
+<title>하루마케팅 | 제주 자영업자 온라인 마케팅 대행</title>
+<meta name="description" content="제주 자영업자의 네이버 플레이스·블로그, 당근, 인스타그램을 한 달 단위로 맡아 운영합니다. 진행 체크리스트와 월간 리포트로 하는 일을 보여 드립니다. 하루마케팅.">
+<meta name="theme-color" content="#FBF8EE">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="하루마케팅">
+<meta property="og:title" content="하루마케팅 | 제주 자영업자 온라인 마케팅 대행">
+<meta property="og:description" content="네이버·당근·인스타그램을 한 달 단위로 맡아 운영하고, 진행은 체크리스트와 월간 리포트로 보여 드립니다.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"하루마케팅","description":"제주 자영업자를 위한 네이버·당근·인스타그램 운영 대행","areaServed":"제주특별자치도","telephone":"010-5546-9514"}</script>
 <link rel="icon" href="./logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +24,7 @@
 <nav id="nav">
   <a class="brand" href="#top" id="navBrand"></a>
   <div class="links">
-    <a href="#top" class="on">Home</a><a href="#about">About</a><a href="#service">Service</a><a href="#channel">Channel</a><a href="#case">Case</a><a href="#price">Price</a><a href="#contact">Contact</a>
+    <a href="#top" class="on">Home</a><a href="#about">About</a><a href="#service">Service</a><a href="#channel">Channel</a><a href="#case">Case</a><a href="#price">Price</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
   </div>
 </nav>
 
@@ -59,7 +66,7 @@
 <section id="service" class="sec">
   <div class="wrap">
     <p class="kicker reveal">SERVICE</p>
-    <h2 class="t reveal">브랜드가 <em>고객에게 닿는</em> 모든 과정</h2>
+    <h2 class="t reveal">사장님 가게가 <em>고객에게 닿도록</em> 하는 일</h2>
     <div class="cards" id="services"></div>
   </div>
 </section>
@@ -77,6 +84,17 @@
     <p class="kicker reveal">WORK PROCESS</p>
     <h2 class="t reveal">상담부터 개선까지, <em>다섯 단계</em></h2>
     <div class="timeline" id="process"></div>
+  </div>
+</section>
+
+<section id="trust" class="sec yellow">
+  <div class="wrap">
+    <p class="kicker reveal">CONTRACT · REPORT</p>
+    <h2 class="t reveal">한 달 단위로 시작하고, <em>진행은 눈으로 확인</em>합니다</h2>
+    <div class="cards" id="contract"></div>
+    <p class="trust-lead reveal" id="trustLead"></p>
+    <div class="cols" id="trust2"></div>
+    <p class="pnote" id="trustNote"></p>
   </div>
 </section>
 
@@ -103,6 +121,16 @@
     <p class="kicker reveal">CASE</p>
     <h2 class="t reveal">실제로 운영한 <em>사례</em></h2>
     <div class="cases" id="cases"></div>
+    <p class="pnote" id="casesNote"></p>
+  </div>
+</section>
+
+<section id="voice" class="sec yellow" hidden>
+  <div class="wrap">
+    <p class="kicker reveal">VOICE</p>
+    <h2 class="t reveal">고객의 <em>한마디</em></h2>
+    <div class="cases" id="voices"></div>
+    <p class="pnote" id="voiceNote"></p>
   </div>
 </section>
 
@@ -123,7 +151,8 @@
       <div class="plist" id="plist"></div>
       <div class="pkg" id="pkg"></div>
     </div>
-    <p class="pnote">※ 월 이용 금액 기준이며, 업종·목표에 따라 맞춤 견적이 가능합니다.</p>
+    <p class="pextra reveal" id="pextra"></p>
+    <p class="pnote" id="pnote"></p>
   </div>
 </section>
 
@@ -135,13 +164,23 @@
   </div>
 </section>
 
+<section id="faq" class="sec">
+  <div class="wrap">
+    <p class="kicker reveal">FAQ</p>
+    <h2 class="t reveal">자주 묻는 <em>질문</em></h2>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
 <footer id="contact">
   <div class="wrap">
     <img class="logo" id="fLogo" alt="하루마케팅 로고">
     <div class="big">사장님은 매장에 집중하세요.<br><em>운영은 함께 고민합니다.</em></div>
     <p class="hand" id="hand2"></p>
     <a class="tel" id="fTel" href="#"></a>
+    <div class="clinks" id="cLinks"></div>
     <div class="who" id="fWho"></div>
+    <div class="biz" id="biz"></div>
     <div class="disc" id="disc"></div>
   </div>
 </footer>
@@ -239,9 +278,48 @@ const won = n => n.toLocaleString("ko-KR");
 $("#plist").innerHTML = D.pricing.items.map(p =>
   `<div class="prow"><div><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p></div><div class="p"><small>월</small>${won(p.p)}<small style="margin:0 0 0 2px">원</small></div></div>`).join("");
 const k = D.pricing.pkg;
-$("#pkg").innerHTML = `<span class="badge">♥ 패키지 이용 시</span><h3>${esc(k.t)}</h3><p>${esc(k.d)}</p><div class="pp"><small>월</small>${won(k.p)}<small style="margin:0 0 0 4px">원</small></div>`;
+$("#pkg").innerHTML = `<span class="badge">${esc(k.badge || "전체 서비스")}</span><h3>${esc(k.t)}</h3><p>${esc(k.d)}</p><div class="pp"><small>월</small>${won(k.p)}<small style="margin:0 0 0 4px">원</small></div>`;
 
 $("#rec").innerHTML = D.recommend.map(r => `<li>${esc(r)}</li>`).join("");
+
+/* 가격 보충 안내 */
+$("#pextra").textContent = D.pricing.extra || "";
+$("#pextra").hidden = !D.pricing.extra;
+$("#pnote").textContent = D.pricing.note + (D.pricing.vat ? " " + D.pricing.vat : "");
+
+/* 계약 방식 · 진행 확인 */
+$("#contract").innerHTML = D.contract.map((c, i) =>
+  `<div class="card reveal" style="transition-delay:${i * 70}ms"><div class="no">${pad(i + 1)}</div><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div>`).join("");
+const T = D.transparency;
+$("#trustLead").textContent = T.lead;
+$("#trust2").innerHTML =
+  `<div class="panel reveal"><h4>${esc(T.checklist.t)}</h4><p class="tp">${esc(T.checklist.d)}</p>
+     <table class="mini"><thead><tr><th>항목</th><th>목표</th><th>완료</th><th>진행률</th></tr></thead>
+     <tbody>${T.checklist.sample.map(r => `<tr>${r.map(x => `<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+   <div class="panel why reveal" style="transition-delay:.12s"><h4>${esc(T.report.t)}</h4><p class="tp">${esc(T.report.d)}</p>
+     <ul>${T.report.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+$("#trustNote").textContent = "※ " + T.note;
+
+/* 사례 보충 · 고객의 한마디(내용이 있을 때만 표시) */
+$("#casesNote").textContent = D.casesNote ? "※ " + D.casesNote : "";
+const V = D.testimonials || [];
+$("#voice").hidden = !V.length;
+$("#voiceNote").textContent = V.length && D.testimonialsNote ? "※ " + D.testimonialsNote : "";
+$("#voices").innerHTML = V.map((v, i) =>
+  `<div class="case reveal" style="transition-delay:${(i % 2) * 90}ms"><p style="font-size:16px;color:var(--ink)">“${esc(v.quote)}”</p><h3 style="font-size:17px;margin:0">${esc(v.name)}</h3></div>`).join("");
+
+/* 자주 묻는 질문 */
+$("#faqList").innerHTML = D.faq.map((f, i) =>
+  `<details class="fq reveal" style="transition-delay:${(i % 4) * 50}ms"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
+
+/* 연락 수단 · 사업자 정보(채워진 것만 표시) */
+const C = D.contact || {}, B = D.business || {};
+$("#cLinks").innerHTML =
+  (C.kakao ? `<a href="${esc(C.kakao)}" target="_blank" rel="noopener">카카오톡 상담</a>` : "") +
+  (C.email ? `<a href="mailto:${esc(C.email)}">${esc(C.email)}</a>` : "");
+const biz = [B.name && `상호 ${B.name}`, B.ceo && `대표 ${B.ceo}`, B.regNo && `사업자등록번호 ${B.regNo}`, B.address && `주소 ${B.address}`].filter(Boolean);
+$("#biz").textContent = biz.join(" · ");
+$("#biz").hidden = !biz.length;
 
 initVideos();
 

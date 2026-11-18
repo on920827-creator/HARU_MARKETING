@@ -337,3 +337,29 @@ button.btn{cursor:pointer;background:transparent}
 body.km-open{overflow:hidden}
 @keyframes kmf{from{opacity:0}to{opacity:1}}
 @keyframes kmu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* ===== 추가: 계약·진행 확인, FAQ, 고객의 한마디, 연락·사업자 정보 ===== */
+.trust-lead{margin:clamp(36px,6vh,64px) 0 22px;font-family:var(--serif);font-weight:600;font-size:clamp(20px,2.4vw,28px);line-height:1.4;letter-spacing:-.02em}
+.tp{margin:0 0 18px;font-size:14.5px;color:var(--muted)}
+.panel.why .tp{color:var(--ink)}
+table.mini{font-size:14px}
+table.mini th{color:var(--muted);letter-spacing:.08em}
+table.mini td{border-top:1px solid var(--line)}
+table.mini td:first-child{text-align:left}
+.pextra{margin:22px 0 0;padding:16px 22px;background:var(--y-soft);border-radius:16px;font-size:14.5px;font-weight:500}
+.pextra[hidden]{display:none}
+.faq{border-top:1px solid var(--line)}
+.fq{border-bottom:1px solid var(--line)}
+.fq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:26px 4px;font-family:var(--serif);font-weight:600;font-size:clamp(17px,1.8vw,21px);line-height:1.45}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{content:"+";flex:none;width:30px;height:30px;line-height:28px;text-align:center;border:1px solid var(--line);border-radius:50%;font-family:var(--jua);font-size:18px;transition:.3s}
+.fq[open] summary::after{content:"\2212";background:var(--y);border-color:var(--y)}
+.fq summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.fq p{margin:0;padding:0 4px 28px;max-width:780px;font-size:15px;color:var(--muted)}
+.clinks{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.clinks:empty{display:none}
+.clinks a{padding:12px 26px;border:1px solid var(--line-d);border-radius:40px;color:var(--cream);text-decoration:none;font-family:var(--jua);font-size:14.5px;transition:.35s}
+.clinks a:hover{background:var(--y);color:var(--ink);border-color:var(--y)}
+footer .biz{max-width:720px;margin:22px auto 0;font-size:11.5px;line-height:1.9;color:var(--muted-d)}
+footer .biz[hidden]{display:none}
+section[hidden]{display:none}
