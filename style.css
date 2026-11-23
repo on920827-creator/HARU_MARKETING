@@ -363,3 +363,67 @@ table.mini td:first-child{text-align:left}
 footer .biz{max-width:720px;margin:22px auto 0;font-size:11.5px;line-height:1.9;color:var(--muted-d)}
 footer .biz[hidden]{display:none}
 section[hidden]{display:none}
+
+/* ===== 정돈 레이어 (2026-11-23) =====
+   기준: 폰트 2종(Noto Serif KR 제목 · Pretendard 본문), 색 3가지(딥 버건디 · 웜 베이지 · 세이지 그레이)와 먹색.
+   빛나는 공·격자·떠다니는 점·그림자 번쩍임·손글씨/주아 폰트를 걷어 내고, 선과 여백으로 위계를 만든다. */
+:root{
+  --y:#E8D2B5;            /* 어두운 면 위의 포인트(웜 베이지) */
+  --y2:#F1E3CE; --y-soft:#F0E4D2;
+  --y-deep:#590907;       /* 밝은 면 위의 포인트(딥 버건디) */
+  --gold:#590907;
+  --sage:#A5A79B;
+  --cream:#F7F2E8; --cream2:#EDE4D4;
+  --ink:#1B1412; --ink2:#251B18;
+  --muted:#6A6058; --muted-d:#B9AE9F;
+  --line:rgba(27,20,18,.14); --line-d:rgba(247,242,232,.16);
+  --shadow:0 1px 0 rgba(27,20,18,.06);
+  --jua:"Pretendard Variable","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
+  --hand:"Noto Serif KR",serif;
+}
+::selection{background:var(--y-deep);color:var(--cream)}
+
+/* 히어로: 평평한 종이 위에 큰 제목. 공·격자·떠다니는 점 제거 */
+.hero{background:var(--cream)}
+.hero::after,.hero .orb,.hero .scroll::after{display:none}
+.hero .logo{box-shadow:none;border:1px solid var(--line)}
+.hero h1{font-weight:300}
+.hero h1 span:last-child{background:linear-gradient(transparent 80%,rgba(89,9,7,.22) 80%,rgba(89,9,7,.22) 94%,transparent 94%)}
+.eyebrow,.kicker{color:var(--y-deep)}
+.dark .kicker,.feature.c .kicker{color:var(--y)}
+h2.t em{background:linear-gradient(transparent 78%,rgba(89,9,7,.2) 78%,rgba(89,9,7,.2) 92%,transparent 92%)}
+.dark h2.t em{background:none;color:var(--y)}
+.ex li b,.panel:not(.why) li b{background:linear-gradient(transparent 70%,rgba(89,9,7,.16) 70%)}
+
+/* 버튼·태그: 둥근 알약 대신 얇은 직사각형 */
+.btn{border-radius:2px;padding:15px 28px;font-weight:600;letter-spacing:.04em}
+.btn.dark{background:var(--ink);color:var(--y);border-color:var(--ink)}
+.btn.dark:hover{background:var(--y-deep);color:var(--cream);border-color:var(--y-deep);box-shadow:none}
+.fab{border-radius:2px;box-shadow:none}
+.kw li,.ex .tag,.case .tag,.flow li,.pkg .badge,.vbadge,.rp,td.res span,.ex .fm,.chg .new,.sb{border-radius:3px}
+.kw li:hover{background:var(--y);border-color:var(--y)}
+.case .tag{background:var(--y-soft)}
+footer .tel{border-radius:2px;background:var(--y);color:var(--ink);padding:14px 40px}
+footer .tel:hover{transform:none;box-shadow:none;background:#fff}
+.clinks a{border-radius:2px}
+
+/* 카드: 반듯한 모서리, 얇은 선, 살짝만 반응 */
+.card,.ex,.case,.panel,.plist,.pkg,.rk .box{border-radius:10px;box-shadow:none}
+.card::before{background:var(--y-deep);border-radius:0;width:28px}
+.card:hover,.ex:hover,.case:hover{transform:translateY(-2px);box-shadow:none;border-color:var(--y-deep)}
+.card .no,.str .no,.ex .no{color:var(--y-deep)}
+.ex li::before,.panel li::before,.flow li+li::before{color:var(--y-deep);background:var(--y-deep)}
+.flow li+li::before{background:none}
+.panel.why{background:var(--y);border-color:var(--y)}
+.panel.why li::before{background:var(--ink)}
+.rec li::before{background:var(--y-deep);color:var(--cream);border-radius:50%}
+.pkg::before{display:none}
+
+/* 어두운 면의 수치·제목: 베이지 한 가지 */
+.tl:hover::before{box-shadow:none}
+.vc{background:rgba(232,210,181,.08)}
+.feature.c .big{-webkit-text-stroke-color:rgba(232,210,181,.22)}
+
+/* 손글씨 문구: 기울임 없이 명조로 */
+.hand{transform:none;font-weight:400;font-size:clamp(20px,2.2vw,28px);color:var(--y-deep)}
+nav.solid{background:rgba(247,242,232,.9)}
